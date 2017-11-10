@@ -15,3 +15,7 @@ https://docs.google.com/spreadsheets/d/10U5gh27I7xfo953HzmjJbE9nIA5biD6aZJqc6T3_
 ## Arxiv paper
 
 https://arxiv.org/abs/1708.03731
+
+## Suite page on openml (must be updated)
+
+
