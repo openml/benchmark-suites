@@ -1,0 +1,88 @@
+---
+title:"Untitled"
+output:html_document
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+library(OpenML)
+library(batchtools) # we need at least0.9.6.9001
+library(mlr)
+library(DT)
+library(BBmisc)
+
+# get general task/data infos
+tasks = rbind(listOMLTasks(tag = "OpenML100"), listOMLTasks(tag = "OpenML100", status = c("deactivated")))
+number.of.col.names = colnames(tasks)[grepl("number.of", colnames(tasks))]
+cols = c("task.id", "data.id", "name", "majority.class.size", "minority.class.size", "max.nominal.att.distinct.values", number.of.col.names)
+tasks = tasks[, cols]
+```
+
+# Successful runs
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+if (file.exists("res.done.RData")) {
+  res.done = load2("res.done.RData")
+} else {
+  reg = loadRegistry("bench5learner")
+  
+  # get done results
+  done = findDone()
+  job.done = getJobStatus(ids = done)
+  
+  res = reduceResultsDataTable(ids = done, fun = function(job, res) {
+    z = as.list(getBMRAggrPerformances(res$run$bmr, as.df = TRUE))
+    z$tid = job$problem$data$tid
+    return(as.data.table(z))
+  })
+  
+  # merge job infos + done results + task infos
+  res.done = merge(job.done, flatten(res))
+  res.done = res.done[, c("job.id", "tid", "learner.id", "time.running", "memory", "acc.test.join", "timetrain.test.sum", "timepredict.test.sum")]
+  res.done = merge(res.done, tasks, by.x = "tid", by.y = "task.id", all.x = TRUE)
+  res.done = convertDataFrameCols(res.done, chars.as.factor = TRUE)
+  colnames(res.done) = gsub("number.of.", "", colnames(res.done))
+  
+  save(res.done, file = "res.done.RData")
+}
+
+# very cool options for dt https://rstudio.github.io/DT/extensions.html
+datatable(res.done, filter = "top", extensions = c("Buttons", "ColReorder"), 
+  options = list(dom = 'Blfrtip', buttons = I('colvis'), colReorder = TRUE))
+# http://rpubs.com/giuseppec/OpenML100successful
+```
+
+# Failed or expired runs (walltime: 3 hours, memory: 2 GB)
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+if (file.exists("res.missing.RData")) {
+  res.missing = load2("res.missing.RData")
+} else {
+  reg = loadRegistry("bench5learner")
+  not.done = findNotDone()
+  
+  # get not done runs (errored + expired)
+  res.missing = getJobTable(not.done)
+  res.missing = res.missing[,  c("job.id", "error", "memory", "problem", "algo.pars")]
+  res.missing$tid = as.numeric(gsub("oml", "", res.missing$problem))
+  res.missing$problem = NULL
+  res.missing$learner.id = vcapply(unlist(res.missing$algo.pars, recursive = FALSE), getLearnerId)
+  res.missing$algo.pars = NULL
+  res.missing = merge(res.missing, tasks, by.x = "tid", by.y = "task.id", all.x = TRUE)
+
+  # add last line of logfile to expired runs
+  expired.ind = is.na(res.missing$error)
+  res.missing$error[expired.ind] = vcapply(res.missing$job.id[expired.ind], function(x) {
+    ret = getLog(x) 
+    n = length(ret)
+    ret[n]
+  })
+  
+  res.missing = convertDataFrameCols(res.missing, chars.as.factor = TRUE)
+  colnames(res.missing) = gsub("number.of.", "", colnames(res.missing))
+    
+  save(res.missing, file = "res.missing.RData")
+}
+
+datatable(res.missing, filter = "top", extensions = c("Buttons", "ColReorder"), 
+  options = list(dom = 'Blfrtip', buttons = I('colvis'), colReorder = TRUE))
+# http://rpubs.com/giuseppec/OpenML100failed
+```
