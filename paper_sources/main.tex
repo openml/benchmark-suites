@@ -249,8 +249,8 @@ OpenML has also been integrated in MOA and RapidMiner~\citep{Rijn2015}.
     \caption{Running classifiers on a task and (optionally) uploading the results. Uploading requires the user to fill in an API key.\label{fig:code_examples}%\todo{TODO: change name OpenML100 to OpenML-CC18 in all 3 code examples.}
     }
   \end{center}
-\end{figure}
-\vspace{-0.5cm} % TODO: add negative vspace as the typesetting is too much 
+\vspace{-0.5cm}
+\end{figure} % TODO: add negative vspace as the typesetting is too much 
 OpenML works with the concept of \emph{tasks} to facilitate comparable and reproducible results.
 A task extends a dataset with task-specific information, such as target attributes and evaluation procedures. Datasets and tasks are automatically downloaded at first use and are afterwards cached locally. \emph{Studies} combine a specific set of tasks and can also hold all benchmarking results obtained on them. In the code examples, the OpenML-CC18 tasks are downloaded through the study with the same name. They also show how to access the raw data set (although this is not needed to train a model), fit a simple classifier on the defined data splits, and finally publish runs on the OpenML server. 
 %
@@ -421,49 +421,6 @@ The set of datasets on \url{OpenML.org} can easily be extended, and additional O
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\end{table}
-
-\newpage
-\section{Reasons for exclusion of datasets from the OpenML-CC18 Benchmarking Suite} 
-\label{app:datasets2}
-
-\todo{MF: Actually add this - please find two rough proposal below!}
-\todo{BB: IMHO remove appendix B completely, we dont have to argue why specific sets are NOT in there}
-
-\begin{description}
-	\item[Artificially Generated] \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}
-	\item[Derived] \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}
-	\item[Time series] \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}, \href{https://www.openml.org/d/3}{kr-vs-kp~(3)}, \href{https://www.openml.org/d/6}{letter~(6)}
-\end{description}
-
-\begin{table}[h]
-% \Huge
-\setlength{\tabcolsep}{2pt}
-\caption{Datasets excluded because they are artificially generated.}
-\label{tab:dataset:artificial}
-\centering
-% \begin{adjustbox}{width=\textwidth}
-% \begin{adjustbox}{center, width=7.75cm, totalheight=12cm}
-\begin{tabular}{l}
-\toprule
-\textbf{ Dataset name (dataset id) } \\
-\midrule
-	\href{https://www.openml.org/d/3}{kr-vs-kp (3)} \\ 
-	\href{https://www.openml.org/d/6}{letter  (6)} \\ 
-   
-\bottomrule
-\end{tabular}
-~~~~~
-\begin{tabular}{l}
-\toprule
-\textbf{ Dataset name (dataset id) } \\
-\midrule 
-	\href{https://www.openml.org/d/3913}{kc2 (3913)} \\ 
-	\href{https://www.openml.org/d/3917}{kc1 (3917)} \\ 
- 
-\bottomrule
-\end{tabular}
-%\end{adjustbox}
 \end{table}
 
 \end{document}
