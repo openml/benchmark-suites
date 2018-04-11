@@ -118,7 +118,7 @@ carefully curated from the thousands of datasets available on \href{https://www.
 
 Proper algorithm benchmarking is a hallmark of machine learning research. It allows us, as a community, to track progress over time, to identify which issues are still challenging, and to learn which algorithms are most appropriate for specific applications. However, we currently lack standardized, easily-accessible benchmarking suites of datasets that are curated to reflect important problem domains, practical to use, and that support a rigorous analysis of performance results.
 %Thoroughly setting up experiments, e.g., for a scientific paper, can be difficult and time consuming: it is often not clear which datasets should be included, how to choose training/test splits, and which other algorithms to compare against.
-This often results in suboptimal shortcuts in study designs, producing rather small-scale, one-off experiments that should be interpreted with caution \citep{Aha:1992p455}, are hard to reproduce \citep{Pedersen:2008p12980,Hirsh:2008p14360}, and may even lead to contradictory results \citep{Keogh:2003p4930}. Another often criticized aspect is the mindset in benchmark which focuses too much on competition and dominating the state-of-art, instead of a more fine-grained statistical analysis of large-scale studies, including negative results where popular algorithms fail \citep{sculley2018winner}.
+This often results in suboptimal shortcuts in study designs, producing rather small-scale, one-off experiments that should be interpreted with caution \citep{Aha:1992p455}, are hard to reproduce \citep{Pedersen:2008p12980,Hirsh:2008p14360}, and may even lead to contradictory results \citep{Keogh:2003p4930}. Another often criticized aspect is the mindset in benchmarking which focuses too much on competition and dominating the state-of-art, instead of a more fine-grained statistical analysis of large-scale studies, including negative results where popular algorithms fail \citep{sculley2018winner}.
 %In order to produce interpretable benchmarks, they should thoroughly explore different conditions, explain how algorithms are affected by different data properties, or at least clearly state under which conditions their results may hold.
 
 The machine learning field has long recognized the importance of dataset repositories. The UCI repository~\citep{Lichman:2013} offers a wide range of datasets, but it does not attempt to make them available through a uniform format or API. The same holds for other repositories, such as LIBSVM~\citep{chang2011libsvm}. \url{mldata.org} is a very popular repository that does provide an API to easily download datasets, and is readily integrated in scikit-learn. However, it is no longer being maintained, and will very likely be merged with our OpenML platform. %\todo{MF: @Joaquin: could you please update this with the current status of OpenML}
@@ -168,17 +168,17 @@ On top of OpenML's
 %\todo{MF: not sure if I get the word customizable here\\FH: reworded; please drop the note if this is fine.} 
 functionality to provide customized dataset collections through the API, we provide a new standard benchmarking
 %\todo{FH: do we call it ``benchmarking suite'' or ``benchmarking suite''? Unify throughout the paper.}
-suite of \numdatasets high-quality classification datasets carefully curated from the many thousands available on OpenML: the OpenML-CC18.
+suite of \numdatasets~high-quality classification datasets carefully curated from the many thousands available on OpenML: the OpenML-CC18.
 
 %In order to facilitate this selection process and to provide the machine learning community with a list of high-quality classification datasets, we manually selected 100 datasets among all available datasets on OpenML.
 We selected classification datasets for this benchmarking suite to satisfy the following requirements:
 %\todo{BB: check the following list, at least at minimal class size}
 \begin{enumerate*}[(a)]
-  \item the number of observations are between \num{500} and \num{100000} to focus on medium-sized datasets,
+  \item the number of observations is between \num{500} and \num{100000} to focus on medium-sized datasets,
   %that are not too small and not too big,
   \item the number of features does not exceed \num{5000}~features to keep the runtime of algorithms low,
   \item the target attribute has at least two classes,
-  \item have classes with less than 20 observations, and\
+  \item have at least 20 observations per class, and\
   \item the ratio of the minority class and the majority class is above $0.05$ (to eliminate highly imbalanced datasets which require special treatment for both algorithms and evaluation measures).
 \end{enumerate*}
 %\todo{FH: maybe ``target feature'' is a commonly-used term in some community, but I saw the term for the first time. How about ``target variable''? MF: how about ``attribute``''? I think it is more used than variable.}
