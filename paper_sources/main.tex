@@ -249,7 +249,7 @@ OpenML has also been integrated in MOA and RapidMiner~\citep{Rijn2015}.
     \caption{Running classifiers on a task and (optionally) uploading the results. Uploading requires the user to fill in an API key.\label{fig:code_examples}%\todo{TODO: change name OpenML100 to OpenML-CC18 in all 3 code examples.}
     }
   \end{center}
-\vspace{-0.5cm}
+\vspace{-0.7cm}
 \end{figure} % TODO: add negative vspace as the typesetting is too much 
 OpenML works with the concept of \emph{tasks} to facilitate comparable and reproducible results.
 A task extends a dataset with task-specific information, such as target attributes and evaluation procedures. Datasets and tasks are automatically downloaded at first use and are afterwards cached locally. \emph{Studies} combine a specific set of tasks and can also hold all benchmarking results obtained on them. In the code examples, the OpenML-CC18 tasks are downloaded through the study with the same name. They also show how to access the raw data set (although this is not needed to train a model), fit a simple classifier on the defined data splits, and finally publish runs on the OpenML server. 
