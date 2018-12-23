@@ -1,27 +1,21 @@
-# OpenMLFirstBenchmarkSuite
+# OpenML Benchmark Suites
+Machine learning research depends on objectively interpretable, comparable, and reproducible algorithm benchmarks. Therefore, we advocate the use of curated, comprehensive suites of machine learning datasets to standardize the setup, execution, and reporting of benchmarks.  We enable this through platform-independent software tools that help to create and leverage these benchmarking suites. These are seamlessly integrated into the OpenML platform, and accessible through interfaces in Python, Java, and R. 
 
-## Paper on overleaf
+OpenML benchmarking suites are:  
+- easy to use through standardized data formats, APIs, andclient libraries  
+- machine-readable, with extensive meta-information on the includeddatasets  
+- allow benchmarks to be shared and reused in future studies. 
 
-https://www.overleaf.com/9403813qhrzjwpkvypk
+## Documentation
+[https://docs.openml.org/benchmark](Detailed documentation on how to create and use OpenML benchmark suites)
+This also includes a list of current benchmark suites, such as the OpenML-CC18.
 
-## Check list for data sets
-
-https://docs.google.com/spreadsheets/d/10U5gh27I7xfo953HzmjJbE9nIA5biD6aZJqc6T3_YXY/edit#gid=0
-
-## Automated banchmark suite generator
-
-https://github.com/openml/Study-14/blob/master/OpenML%20Benchmark%20generator.ipynb
-
-## Arxiv paper
-
-https://arxiv.org/abs/1708.03731
-
-## Mini-Benchmark of current data sets
-
-http://rpubs.com/giuseppec/OpenML100
-
-## Suite page on openml:
-
-https://www.openml.org/guide/benchmark
-
+## Notebooks
+We provide a set of notebooks to explore existing benchmark suites, and create your own:  
+- Automated benchmark suite generator: Allows you to specific a list of constraints and additional tests, and retrieve all datasets that adhere to them
+- CC18 score overview: Overview of shared results on the CC18 benchmark suites
+- CC18 benchmark analysis: A deeper analysis of existing results in R (note: this was done for an older benchmark set) 
+- Mini-Benchmark of R algorithm on the CC18: http://rpubs.com/giuseppec/OpenML100
+- Mini-Benchmark of WEKA algorithms on the CC18
+- Tutorials for OpenML in R and Python
 
