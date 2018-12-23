@@ -7,7 +7,7 @@ OpenML benchmarking suites are:
 - allow benchmarks to be shared and reused in future studies. 
 
 ## Documentation
-[https://docs.openml.org/benchmark](Detailed documentation on how to create and use OpenML benchmark suites)
+[Detailed documentation on how to create and use OpenML benchmark suites](https://docs.openml.org/benchmark)
 This also includes a list of current benchmark suites, such as the OpenML-CC18.
 
 ## Notebooks
