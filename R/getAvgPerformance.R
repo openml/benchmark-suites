@@ -3,11 +3,11 @@
 
 getAvgPerformance = function(data, measure) {
 
-  temp = na.omit(data[, c("flow.name", measure)])
-  algos = unique(temp$flow.name)
+  temp = na.omit(data[, c("learner.name", measure)])
+  algos = unique(temp$learner.name)
 
   aux = lapply(algos, function(alg) {
-    d = temp[which(temp$flow.name == alg),]
+    d = temp[which(temp$learner.name == alg),]
     ret = mean(d[,2])
     return(ret)
   })

@@ -1,7 +1,7 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getRuntimePlot = function(data, style) {
+getRuntimePlot = function(data, style = "boxplot") {
 
   if(!(style %in% c("point", "boxplot", "violin"))) {
     stop("Please, provide a valid style: point, boxplot or violin ")
