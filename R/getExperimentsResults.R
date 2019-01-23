@@ -4,7 +4,6 @@
 getExperimentsResults = function(tasks) {
 
   aux = lapply(tasks$task.id, function(id) {
-    print(id)
     res = listOMLRunEvaluations(task.id = id, limit = 10000)
     res$task.id = id
     return(res)

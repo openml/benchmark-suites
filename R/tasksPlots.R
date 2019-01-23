@@ -43,3 +43,23 @@ getTasksInfoPlot = function(data) {
 
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
+
+getTasksOverview = function(data, measure = "predictive.accuracy", style = "boxplot") {
+
+  if(!(style %in% c("boxplot", "violin"))) {
+    stop("Please, provide a valid style: boxplot or violin ")
+  }
+
+  sub = dplyr::select(.data = data, data.name, task.id, measure)
+  sub = sub[order(sub$data.name),]
+  colnames(sub) = c("dataset", "task", "value")
+  sub$dataset = factor(sub$dataset)
+
+  g = ggplot(sub[1:100,], mapping = aes(x = value, y = dataset))
+  g = g + geom_violin()
+
+  return(g)
+}
+
+#--------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
