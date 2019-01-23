@@ -32,7 +32,8 @@ getTasksInfoPlot = function(data) {
   colnames(df.final) = c("task", "Measure", "value")
   df.final$task = as.numeric(df.final$task)
 
-  g = ggplot(data=df.final, aes(x=task, y=value, group=Measure, colour=Measure, shape=Measure))
+  g = ggplot(data = df.final, aes(x = task, y = value, group = Measure,
+    colour = Measure, shape = Measure))
   g = g + geom_point() + scale_colour_brewer(palette = "Dark2")
   g = g + ylab(" Maximum value / Majority Class") + xlab("Tasks")
   g = g + scale_x_continuous(limits = c(1, nrow(df)))
