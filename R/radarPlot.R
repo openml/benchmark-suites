@@ -23,8 +23,8 @@ radarChart = function(data, sel.measures = c("area.under.roc.curve",
 
   df = do.call("rbind", aux)
 
-  g = ggplot(df, aes(x = meas, y = value, color = algo, group = algo, fill = algo,
-    shape = algo, linetype = algo))
+  g = ggplot(df, aes(x = meas, y = value, color = algo, group = algo,
+    fill = algo, linetype = algo))
   g = g + geom_polygon(alpha = 0.1) + geom_point() + coord_polar()
   g = g + scale_y_continuous(limits = c(0,1))
 

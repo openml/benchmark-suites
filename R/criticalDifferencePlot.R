@@ -1,7 +1,7 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-criticalDifferencePlot = function(data, measure = "predictive.accuracy") {
+criticalDifferencePlot = function(data, measure = "predictive.accuracy", alpha = 0.05) {
 
   sub.df = dplyr::select(.data = data, task.id, learner.name, measure)
   tasks = unique(sub.df$task.id)
@@ -21,7 +21,7 @@ criticalDifferencePlot = function(data, measure = "predictive.accuracy") {
   rownames(mat) = tasks
   colnames(mat) = algos
 
-  g = scmamp::plotCD(results.matrix = mat, aplha = 0.5)
+  g = scmamp::plotCD(results.matrix = mat, alpha = alpha)
   return(g)
 }
 
