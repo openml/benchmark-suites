@@ -1,15 +1,15 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getRadarChart = function(data, sel.measures = c("area.under.roc.curve",
+radarChart = function(data, sel.measures = c("area.under.roc.curve",
   "predictive.accuracy", "usercpu.time.millis", "recall", "f.measure",
   "precision")) {
 
   sel.measures = sel.measures[order(sel.measures)]
-  sub = dplyr::select(.data = new.data, learner.name, sel.measures)
+  sub = dplyr::select(.data = data, learner.name, sel.measures)
 
   aux = lapply(1:length(sel.measures), function(i) {
-    ret = getAvgPerformance(data = sub, measure = sel.measures[i])
+    ret = averagePerformance(data = sub, measure = sel.measures[i])
     ret$meas = sel.measures[i]
     colnames(ret)[2] = "value"
 
@@ -29,7 +29,7 @@ getRadarChart = function(data, sel.measures = c("area.under.roc.curve",
   g = g + scale_y_continuous(limits = c(0,1))
 
   # TODO: facet by environment (R, JAVA, Python)
-  # g = g + facet_wrap(~chart, ncol=1, nrow=2)
+  # g = g + facet_wrap(~chart, ncol=, nrow=)
 
   g = g + theme_bw()
   g = g + labs(fill = "Algorithms", color = "Algorithms",

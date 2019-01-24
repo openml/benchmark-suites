@@ -1,7 +1,7 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getAvgPerformance = function(data, measure) {
+averagePerformance = function(data, measure) {
 
   temp = na.omit(data[, c("learner.name", measure)])
   algos = unique(temp$learner.name)

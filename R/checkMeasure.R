@@ -1,15 +1,15 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-checkMeasure = function(measure){
+checkMeasure = function(measure) {
 
-  allowed.measures = c("f.measure", "kappa", "mean.absolute.error", "precision", "recall", 
-    "usercpu.time.millis", "area.under.roc.curve", "predictive.accuracy", "root.mean.squared.error")
+  #TODO: replace with checkmate commands
+  allowed.measures = c("f.measure", "kappa", "precision", "recall",
+    "usercpu.time.millis", "area.under.roc.curve", "predictive.accuracy")
+
   if (!( measure %in% allowed.measures)) {
-    stop(paste0(" - Please, choose one of the following measures: ", 
-      paste(allowed.measures, collapse=', '), " \n"))  
-  } else {
-    return(TRUE)
+    stop(paste0(" - Please, choose one of the following measures: ",
+      paste(allowed.measures, collapse=', '), " \n"))
   }
 }
 

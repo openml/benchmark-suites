@@ -1,16 +1,16 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getRuntimePlot = function(data, style = "boxplot") {
+runtimePlot = function(data, style = "boxplot") {
 
   if(!(style %in% c("point", "boxplot", "violin"))) {
     stop("Please, provide a valid style: point, boxplot or violin ")
   }
 
-  temp = dplyr::select(.data = data, learner.name, usercpu.time.millis.training,
+  tmp = dplyr::select(.data = data, learner.name, usercpu.time.millis.training,
     usercpu.time.millis.testing, usercpu.time.millis)
 
-  df = melt(temp, id.vars = 1)
+  df = melt(tmp, id.vars = 1)
   colnames(df) = c("algo", "measure", "value")
 
   g = ggplot(data = df, mapping = aes(x = as.factor(algo), y = log(value), fill = measure))

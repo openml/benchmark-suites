@@ -2,16 +2,15 @@
 #--------------------------------------------------------------------------------------------------
 
 # Obs: Not handling NAs values (removed from the ranking)
+generateRanking = function(mat, descending = FALSE) {
 
-getRanking = function(mat, descending = FALSE) {
-  
   temp = mat
   for(i in 1:nrow(mat)) {
     ids =  which(!is.na(mat[i,]))
     if(descending){
       temp[i, ids] = rank(-mat[i,ids])
     } else {
-      temp[i, ids] = rank( mat[i,ids])  
+      temp[i, ids] = rank( mat[i,ids])
     }
   }
 

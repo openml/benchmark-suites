@@ -1,7 +1,7 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getPerformanceMatrix = function(data, measure = "predictive.accuracy",
+performanceMatrix = function(data, measure = "predictive.accuracy",
   weighted = FALSE, w = 0.1) {
 
   checkMeasure(measure = measure)

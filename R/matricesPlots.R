@@ -1,7 +1,9 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getScaledMatrixPlot = function(mat, data, style = "boxplot", landscape = TRUE,
+# TODO: unify functions
+
+scaledMatrixPlot = function(mat, data, style = "boxplot", landscape = TRUE,
   prefix = NULL) {
 
   if(!(style %in% c("boxplot", "violin"))) {
@@ -37,7 +39,7 @@ getScaledMatrixPlot = function(mat, data, style = "boxplot", landscape = TRUE,
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getScaledMatrixHeatMap = function(mat, landscape = FALSE, prefix = NULL) {
+scaledMatrixHeatMap = function(mat, landscape = FALSE, prefix = NULL) {
 
   mat$task = paste0("OML_Task_",rownames(mat))
 

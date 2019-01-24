@@ -1,9 +1,9 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getRankFrequencyPlot = function(rk, data, k = 5, version = "percentage") {
+rankFrequencyPlot = function(rk, data, k = 5, version = "percentage") {
 
-  data.runtime = getAvgRuntimeData(data = data)
+  data.runtime = getRuntimeData(data = data)
   all.learners = unique(data$learner.name)
   mat = rk$rk
 

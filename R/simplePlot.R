@@ -1,7 +1,7 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getSimplePlot = function(data, measure = "predictive.accuracy", style,
+simplePlot = function(data, measure = "predictive.accuracy", style,
   landscape = TRUE, prefix = NULL) {
 
   if(!(style %in% c("boxplot", "violin"))) {

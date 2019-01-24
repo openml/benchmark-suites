@@ -5,12 +5,11 @@
 # http://colorbrewer2.org/
 # ['#1b9e77','#d95f02','#7570b3']
 
-getTasksInfoPlot = function(data) {
+tasksInfoPlot = function(data) {
 
   tasks = unique(data$task.id)
 
   aux = lapply(tasks, function(task){
-
     sub = data[which(data$task.id == task), ]
     max.acc  = max(sub$predictive.accuracy)
     max.auc  = max(sub$area.under.roc.curve)
@@ -36,7 +35,7 @@ getTasksInfoPlot = function(data) {
     colour = Measure, shape = Measure))
   g = g + geom_point() + scale_colour_brewer(palette = "Dark2")
   g = g + ylab(" Maximum value / Majority Class") + xlab("Tasks")
-  g = g + scale_x_continuous(limits = c(1, nrow(df)))
+  g = g + scale_x_continuous(limits = c(1, length(tasks)))
 
   return(g)
 }
@@ -44,20 +43,27 @@ getTasksInfoPlot = function(data) {
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getTasksOverview = function(data, measure = "predictive.accuracy", style = "boxplot") {
+tasksOverview = function(data, measure = "predictive.accuracy", style = "boxplot") {
 
   if(!(style %in% c("boxplot", "violin"))) {
     stop("Please, provide a valid style: boxplot or violin ")
   }
 
   sub = dplyr::select(.data = data, data.name, task.id, measure)
-  sub = sub[order(sub$data.name),]
+  sub = sub[order(tolower(sub$data.name)),]
   colnames(sub) = c("dataset", "task", "value")
-  sub$dataset = factor(sub$dataset)
+  sub$dataset = factor(sub$dataset, levels = unique(sub$dataset))
 
-  g = ggplot(sub[1:100,], mapping = aes(x = value, y = dataset))
-  g = g + geom_violin()
-
+  g = ggplot(sub, mapping = aes(x = value, y = dataset))
+  if(style == "boxplot") {
+    g = g + stat_boxplot(geom ='errorbar')
+    g = g + geom_boxplot(outlier.colour = "black", outlier.size = 0.5)
+  } else {
+    g = g + geom_violin(trim = TRUE, scale = "width")
+    g = g + geom_boxplot(outlier.colour = "black", outlier.size = 0.5, width = 0.2, fill = "white")
+  }
+  g = g + scale_x_continuous(limits = c(0,1))
+  g = g + theme(legend.position="none")
   return(g)
 }
 

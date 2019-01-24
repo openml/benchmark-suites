@@ -3,8 +3,10 @@
 
 getExperimentsResults = function(tasks) {
 
+  cat(" @ Getting experiment results\n")
   aux = lapply(tasks$task.id, function(id) {
-    res = listOMLRunEvaluations(task.id = id, limit = 10000)
+    cat(" - loading results from task:", id, "\n")
+    res = OpenML::listOMLRunEvaluations(task.id = id, limit = 1000, offset = 0)
     res$task.id = id
     return(res)
   })
