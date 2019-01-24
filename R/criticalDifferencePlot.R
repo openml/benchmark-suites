@@ -23,7 +23,6 @@ criticalDifferencePlot = function(data, measure = "predictive.accuracy") {
 
   g = scmamp::plotCD(results.matrix = mat, aplha = 0.5)
   return(g)
-
 }
 
 #--------------------------------------------------------------------------------------------------
