@@ -14,6 +14,13 @@ def read_cmd():
     return args_
 
 
+def print_len(obj):
+    if obj is None:
+        return 0
+    else:
+        return len(obj)
+
+
 def run(args):
     root = logging.getLogger()
     root.setLevel(logging.INFO)
@@ -22,10 +29,12 @@ def run(args):
     openml.config.apikey = args.apikey
     
     source_study = openml.study.get_study(args.alias)
-    logging.info('[source] data %s tasks %s flows %s setups %s runs %s' % 
-                 (len(source_study.data), len(source_study.tasks), 
-                  len(source_study.flows),
-                  len(source_study.setups), len(source_study.runs)))
+    logging.info('[source] data %d; tasks %d; flows %d; setups %d; runs %d' % 
+                 (print_len(source_study.data), 
+                  print_len(source_study.tasks), 
+                  print_len(source_study.flows),
+                  print_len(source_study.setups), 
+                  print_len(source_study.runs)))
     logging.info('Got study with id = %s' % source_study.id)
     # set alias to None, as chances are that the study alias already exists
     if args.entity_type == 'task':
@@ -44,8 +53,15 @@ def run(args):
             run_ids=source_study.runs
         )
     elif args.entity_type == 'run_implicit':
-        runs = openml.runs.list_runs(setup=source_study.setups, 
-                                     task=source_study.tasks)
+        if source_study.setups is not None:
+            runs = openml.runs.list_runs(setup=source_study.setups, 
+                                         task=source_study.tasks)
+        elif source_study.flows is not None:
+            runs = openml.runs.list_runs(flow=source_study.flows, 
+                                         task=source_study.tasks)
+        else:
+            raise ValueError('setups not flows')
+            
         target_study = openml.study.create_study(
             alias=None, 
             benchmark_suite=source_study.benchmark_suite,
@@ -59,9 +75,12 @@ def run(args):
     study_id = target_study.publish()
     logging.info('Uploaded with id = %s' % study_id)
     study = openml.study.get_study(study_id)
-    logging.info('[uploaded] data %s tasks %s flows %s setups %s runs %s' % 
-                 (len(study.data), len(study.tasks), len(study.flows),
-                  len(study.setups), len(study.runs)))
+    logging.info('[source] data %d; tasks %d; flows %d; setups %d; runs %d' % 
+                 (print_len(study.data), 
+                  print_len(study.tasks), 
+                  print_len(study.flows),
+                  print_len(study.setups), 
+                  print_len(study.runs)))
 
 
 if __name__ == '__main__':
