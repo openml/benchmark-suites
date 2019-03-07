@@ -1,14 +1,15 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getSimplePlot = function(data, measure = "predictive.accuracy", style, landscape = TRUE, prefix = NULL) {
+simplePlot = function(data, measure = "predictive.accuracy", style,
+  landscape = TRUE, prefix = NULL) {
 
   if(!(style %in% c("boxplot", "violin"))) {
     stop("Please, choose a valid style: boxplot or violin.")
   }
   checkMeasure(measure = measure)
 
-  temp = data[, c("flow.name", measure)]
+  temp = data[, c("learner.name", measure)]
   colnames(temp) = c("algo", "meas")
 
   if( measure == "usercpu.time.millis") {
@@ -20,13 +21,13 @@ getSimplePlot = function(data, measure = "predictive.accuracy", style, landscape
   } else {
     y.label = gsub(measure, pattern="\\.", replacement=" ")
   }
-  
+
   if(!is.null(prefix)) {
     y.label = paste(prefix, y.label)
   }
 
-  if(measure %in% c("usercpu.time.millis",  "usercpu.time.millis.training", 
-    "usercpu.time.millis.testing")) { 
+  if(measure %in% c("usercpu.time.millis",  "usercpu.time.millis.training",
+    "usercpu.time.millis.testing")) {
     g = ggplot(data = temp, mapping = aes(x = as.factor(algo), y = log(meas), fill = algo))
   } else {
     g = ggplot(data = temp, mapping = aes(x = as.factor(algo), y = meas, fill = algo))
@@ -43,13 +44,13 @@ getSimplePlot = function(data, measure = "predictive.accuracy", style, landscape
 
   g = g + theme(legend.position="none")
   g = g + xlab("Algorithms") + ylab(y.label)
-  
+
   if(landscape) {
     g = g + coord_flip()
   } else {
-    g = g + theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1))
+    g = g + theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90,
+      vjust = .5, hjust = 1))
   }
-  
   return(g)
 }
 

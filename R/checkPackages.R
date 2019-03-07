@@ -4,22 +4,23 @@
 checkPackages = function(pkgs) {
 
   obj = installed.packages()
+  not.installed = which(!pkgs %in% rownames(obj))
 
-  for(pk in pkgs) {
-    
-    if(pk %in% rownames(obj)) {
-      cat(paste0(" - Package: ", pk, " \t... is already installed\n"))
-    } else {
-      cat(paste0(" - Installing: ", pk, "\n"))  
-      if (pk == "farff") {
-        devtools::install_github("mlr-org/farff")
-      } else if(pk == "OpenML") {
-        devtools::install_github("openml/r", ref = "05b8b97cc5ce6ea1b3f586818cfcf157b16a3cd4")
-      } else {
-        install.packages(pkgs = pk)   
+  if(length(not.installed > 0)) {
+    need = pkgs[not.installed]
+    cat(paste0(" @ Missing packages: ", paste(need, collapse = ", "), "\n"))
+    install.packages(pkgs = need, repo = "http://cran.uni-muenster.de/")
+
+    if("scmamp" %in% not.installed) {
+      if (!requireNamespace("BiocManager", quietly = TRUE)) {
+          install.packages("BiocManager")
+      # dependencies are not in CRAN
+      BiocManager::install("Rgraphviz", version = "3.8")
+      BiocManager::install("graph", version = "3.8")
       }
     }
   }
+  cat(" @ All required packages installed.\n")
 }
 
 #--------------------------------------------------------------------------------------------------

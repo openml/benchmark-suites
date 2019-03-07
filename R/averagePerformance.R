@@ -1,23 +1,23 @@
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
 
-getRuntimeData = function(data) {
+averagePerformance = function(data, measure) {
 
-  temp = dplyr::select(.data = data, task.id, learner.name,
-    usercpu.time.millis.training, usercpu.time.millis.testing, usercpu.time.millis)
-
+  temp = na.omit(data[, c("learner.name", measure)])
   algos = unique(temp$learner.name)
+
   aux = lapply(algos, function(alg) {
-    # TO DO: how to handle missing data here?
-    d = na.omit(temp[which(temp$learner.name == alg),])
-    return(colMeans(d[,3:ncol(d)]))
+    d = temp[which(temp$learner.name == alg),]
+    ret = mean(d[,2])
+    return(ret)
   })
 
-  ret = data.frame(do.call("rbind", aux))
-  ret$alg = algos
-  return(ret)
+  temp = data.frame(do.call("rbind", aux))
+  temp$alg = algos
+  temp = temp[, c(2,1)]
+  colnames(temp) = c("algo", measure)
+  return(temp)
 }
-
 
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
